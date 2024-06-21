@@ -1,0 +1,25 @@
+{
+  "beneficiaries": [
+    {
+      "fullName": "Gajendra",
+      "address": "Panchal Nagar, Vasai",
+      "country": "India",
+      "pinCode": "401203",
+      "id": "1"
+    },
+    {
+      "id": "2",
+      "fullName": "Ajay",
+      "address": "47 W 13th St, New York, NY 10011",
+      "country": "US",
+      "pinCode": "401303"
+    },
+    {
+      "fullName": "Rajkumar ",
+      "address": "Goregaon east",
+      "country": "India",
+      "pinCode": "400063",
+      "id": "4"
+    }
+  ]
+}
