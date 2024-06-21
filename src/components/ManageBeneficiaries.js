@@ -36,12 +36,30 @@ const ManageBeneficiaries = () => {
   };
 
   const handleSave = (beneficiary) => {
-    if (editingBeneficiary) {
-      dispatch(editBeneficiary(beneficiary));
-    } else {
-      dispatch(addBeneficiary({ ...beneficiary, id: Date.now() }));
-    }
-    handleCancel();
+    const url = editingBeneficiary
+      ? `http://localhost:5000/beneficiaries/${editingBeneficiary.id}`
+      : "http://localhost:5000/beneficiaries";
+    const method = editingBeneficiary ? "PUT" : "POST";
+
+    fetch(url, {
+      method,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(beneficiary),
+    })
+      .then((response) => response.json())
+      .then((savedBeneficiary) => {
+        if (editingBeneficiary) {
+          dispatch(editBeneficiary(savedBeneficiary));
+        } else {
+          dispatch(addBeneficiary(savedBeneficiary));
+        }
+        handleCancel();
+      })
+      .catch((error) => {
+        message.error("Error occurred while saving beneficiary");
+      });
   };
 
   const handleRemove = (id) => {

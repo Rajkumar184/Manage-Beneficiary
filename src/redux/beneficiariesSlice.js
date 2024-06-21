@@ -15,18 +15,26 @@ const beneficiariesSlice = createSlice({
       state.beneficiaries.push(action.payload);
     },
     editBeneficiary: (state, action) => {
-      const index = state.beneficiaries.findIndex((b) => b.id === action.payload.id);
+      const index = state.beneficiaries.findIndex(
+        (b) => b.id === action.payload.id
+      );
       if (index !== -1) {
         state.beneficiaries[index] = action.payload;
       }
     },
     removeBeneficiary: (state, action) => {
-      state.beneficiaries = state.beneficiaries.filter((b) => b.id !== action.payload);
+      state.beneficiaries = state.beneficiaries.filter(
+        (b) => b.id !== action.payload
+      );
     },
   },
 });
 
-export const { setBeneficiaries, addBeneficiary, editBeneficiary, removeBeneficiary } =
-  beneficiariesSlice.actions;
+export const {
+  setBeneficiaries,
+  addBeneficiary,
+  editBeneficiary,
+  removeBeneficiary,
+} = beneficiariesSlice.actions;
 
 export default beneficiariesSlice.reducer;

@@ -2,7 +2,7 @@ import React from 'react';
 import { Descriptions } from 'antd';
 
 const BeneficiaryView = ({ beneficiary }) => (
-  <Descriptions title="Beneficiary Details">
+  <Descriptions layout="vertical">
     <Descriptions.Item label="Full Name">{beneficiary.fullName}</Descriptions.Item>
     <Descriptions.Item label="Address">{beneficiary.address}</Descriptions.Item>
     <Descriptions.Item label="Country">{beneficiary.country}</Descriptions.Item>

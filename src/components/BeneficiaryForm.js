@@ -13,27 +13,12 @@ const BeneficiaryForm = ({ beneficiary, onSave }) => {
     if (beneficiary) {
       setValue("fullName", beneficiary.fullName || "");
       setValue("address", beneficiary.address || "");
-      setValue("country", beneficiary.country || ""); // Ensure beneficiary.country is not undefined
+      setValue("country", beneficiary.country || "");
       setValue("pinCode", beneficiary.pinCode || "");
     }
   }, [beneficiary, setValue]);
 
   const onSubmit = (data) => {
-    const url = beneficiary
-      ? `http://localhost:5000/beneficiaries/${beneficiary.id}`
-      : "http://localhost:5000/beneficiaries";
-    const method = beneficiary ? "PUT" : "POST";
-
-    fetch(url, {
-      method,
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
-      .then((response) => response.json())
-      .then(onSave);
-
     if (beneficiary) {
       data.id = beneficiary.id;
     }
