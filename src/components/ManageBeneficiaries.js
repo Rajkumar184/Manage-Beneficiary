@@ -20,7 +20,7 @@ const ManageBeneficiaries = () => {
   );
 
   useEffect(() => {
-    fetch("http://localhost:5000/beneficiaries")
+    fetch("https://json-server-bw4b.onrender.com/beneficiaries")
       .then((response) => response.json())
       .then((data) => dispatch(setBeneficiaries(data)));
   }, [dispatch]);
@@ -37,8 +37,8 @@ const ManageBeneficiaries = () => {
 
   const handleSave = (beneficiary) => {
     const url = editingBeneficiary
-      ? `http://localhost:5000/beneficiaries/${editingBeneficiary.id}`
-      : "http://localhost:5000/beneficiaries";
+      ? `https://json-server-bw4b.onrender.com/beneficiaries/${editingBeneficiary.id}`
+      : "https://json-server-bw4b.onrender.com/beneficiaries";
     const method = editingBeneficiary ? "PUT" : "POST";
 
     fetch(url, {
@@ -63,7 +63,7 @@ const ManageBeneficiaries = () => {
   };
 
   const handleRemove = (id) => {
-    fetch(`http://localhost:5000/beneficiaries/${id}`, {
+    fetch(`https://json-server-bw4b.onrender.com/beneficiaries/${id}`, {
       method: "DELETE",
     })
       .then((response) => {
