@@ -7,7 +7,15 @@ const { Option } = Select;
 const countries = ["India", "US", "UK", "Canada", "Australia"];
 
 const BeneficiaryForm = ({ beneficiary, onSave }) => {
-  const { control, handleSubmit, setValue } = useForm();
+  const { control, handleSubmit, setValue, reset } = useForm({
+    defaultValues: {
+      fullName: "",
+      address: "",
+      country: "",
+      pinCode: ""
+    }
+  });
+  const [form] = Form.useForm();
 
   React.useEffect(() => {
     if (beneficiary) {
@@ -15,18 +23,22 @@ const BeneficiaryForm = ({ beneficiary, onSave }) => {
       setValue("address", beneficiary.address || "");
       setValue("country", beneficiary.country || "");
       setValue("pinCode", beneficiary.pinCode || "");
+    } else {
+      reset();  
     }
-  }, [beneficiary, setValue]);
+  }, [beneficiary, setValue, reset]);
 
   const onSubmit = (data) => {
     if (beneficiary) {
       data.id = beneficiary.id;
     }
     onSave(data);
+    form.resetFields(); 
+    reset();  
   };
 
   return (
-    <Form layout="vertical" onFinish={handleSubmit(onSubmit)}>
+    <Form form={form} layout="vertical" onFinish={handleSubmit(onSubmit)}>
       <Form.Item label="Full Name" required>
         <Controller
           name="fullName"
@@ -49,7 +61,7 @@ const BeneficiaryForm = ({ beneficiary, onSave }) => {
           control={control}
           rules={{ required: true }}
           render={({ field }) => (
-            <Select {...field} defaultValue={beneficiary?.country || undefined}>
+            <Select {...field}>
               {countries.map((country) => (
                 <Option key={country} value={country}>
                   {country}
